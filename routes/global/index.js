@@ -4,9 +4,10 @@ const models  = require('../../models');
 
 Index.use("/", (req,res)=>{
     try{
-        models.Article.findAll()
-        .then(x=>res.send(x))
-
+        setTimeout(() => {
+            res.send('xfsdfdqs')
+        }, 1000);
+        
     }
     catch{(x)=>console.log(x)}
 })
