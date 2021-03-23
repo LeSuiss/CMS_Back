@@ -93,11 +93,10 @@ Index.post("/checkAuth", async (req,res)=>{
     try {
         let token = jwt.verify(req.body.jwt_token, config.jwt_secret)
         let current = new Date()
-        console.log(current)
-        console.log(new Date(token.iat))
         result.isAuth = new Date(token.iat) < current && current >new Date(token.exp)
         if (!result.isAuth) result.message= 'token périmé' 
-    } catch (error) {
+    } 
+    catch (error) {
         console.log("catching token verification error:" , error)
     } 
    console.log(result)

@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     code: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(245),
       allowNull: true
     }
   }, {
