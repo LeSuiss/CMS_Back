@@ -2,8 +2,6 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/config.json')[env];
 
-
-
 const express = require('express')
 const fs = require('fs');
 const CRUD = require('express-sequelize-crud')
@@ -33,24 +31,20 @@ const getModels = new Promise ( (resolve, reject) => fs.readdir(ModelsFolder, fu
     } 
     catch (error) {
         console.log('error')
+        reject()
     }       //listing all files using forEach
     
 }) )
 
 const globalStructure = {}
-getModels.then((res)=>{
 
-    AllTables.map(ModelName=>{
-        Object.assign(globalStructure, {[ModelName]: Object.keys(models[ModelName].rawAttributes)})
-        Index.use(CRUD.crud(`/${ModelName}`, models[ModelName]))
-    })
+getModels
+    .then(function declareAllCRUDRoutes(){
+        AllTables.map(ModelName=>{
+            Object.assign(globalStructure, {[ModelName]: Object.keys(models[ModelName].rawAttributes)})
+            Index.use(CRUD.crud(`/${ModelName}`, models[ModelName]))
+        })
 } )   
-// Object.keys(models)
-// .filter(x=>x!=="sequelize" && x!=="Sequelize")
-// .map(model=>console.log(model))
-
-// Index.get('/getDbStructure', async(req,res)=>{
-// })
 
 Index.get('/getStructure', (req, res) => {
     res.send(globalStructure)
@@ -84,7 +78,6 @@ Index.post("/login", async (req,res)=>{
 
 
 Index.post("/checkAuth", async (req,res)=>{
-    console.log(req.body.jwt_token)
     // get account from database
     let result = {
         isAuth: false,
