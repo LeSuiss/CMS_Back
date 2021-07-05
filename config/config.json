@@ -2,7 +2,7 @@
 {
     "development": {
         "username": "root",
-        "password": "bijour11",
+        "password": "Bijour11**",
         "jwt_secret":"mapetiteentrepriseneconnaitpaslacrise",
         "database": "JurisSi",
         "host": "127.0.0.1",

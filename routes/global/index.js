@@ -3,14 +3,11 @@ const Index = express.Router()
 const models  = require('../../models');
 
 Index.use("/", (req,res)=>{
-    try{
-        setTimeout(() => {
-            res.send('xfsdfdqs')
-        }, 1000);
+  console.log("object")
+            res.send({testBack:'xfsdfdqs', test222:"totoestMagique", onemore:"hoho"})
         
     }
-    catch{(x)=>console.log(x)}
-})
+)
 
 
 

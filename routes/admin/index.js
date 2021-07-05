@@ -13,38 +13,15 @@ const jwt = require('jsonwebtoken')
 const models  = require('../../models');
 
 const Index = express.Router()
-const ModelsFolder = path.dirname(require.main.filename)+'/models/';
-const AllTables =  []
-
-
-const getModels = new Promise ( (resolve, reject) => fs.readdir(ModelsFolder, function (err, files) {
-    //handling error
-    try {
-        files.forEach(function (file) {
-            //remove .js extension then push // first letter is uppercase and singular: Article
-            const fileTopush = file.slice(0, file.length-3)
-            const exceptions = ['index', 'init-models']
-            !exceptions.includes(fileTopush) && AllTables.push(fileTopush)
-        });
-
-        resolve()
-    } 
-    catch (error) {
-        console.log('error')
-        reject()
-    }       //listing all files using forEach
-    
-}) )
 
 const globalStructure = {}
 
-getModels
-    .then(function declareAllCRUDRoutes(){
-        AllTables.map(ModelName=>{
-            Object.assign(globalStructure, {[ModelName]: Object.keys(models[ModelName].rawAttributes)})
-            Index.use(CRUD.crud(`/${ModelName}`, models[ModelName]))
-        })
-} )   
+for (const ModelName of Object.keys(models.sequelize.models)) {
+    Object.assign(globalStructure, {[ModelName]: Object.keys(models[ModelName].rawAttributes)})
+    Index.use(CRUD.crud(`/${ModelName}`, models[ModelName]))
+    
+}
+console.log(models.sequelize.modelManager)
 
 Index.get('/getStructure', (req, res) => {
     res.send(globalStructure)
@@ -57,14 +34,14 @@ Index.post("/login", async (req,res)=>{
     if (firstConnection.length===0){
         console.log('creating new user as it is first connection')
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        await models.Users.create({ email: req.body.username, password: hashedPassword})
+        await models.Users.create({ "email_email": req.body.username, text_password: hashedPassword})
     }
     
-    const account = await models.Users.findOne({ where:{email: req.body.username}, raw:true});
+    const account = await models.Users.findOne({ where:{"email_email": req.body.username}, raw:true});
 
     
     // check account found and verify password
-    if (!account || !bcrypt.compareSync(req.body.password, account.password)) {
+    if (!account || !bcrypt.compareSync(req.body.password, account.text_password)) {
         // authentication failed
         console.log('refused')
         res.send({isAuth: false});
