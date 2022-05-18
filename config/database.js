@@ -1,5 +1,5 @@
 const parse = require('pg-connection-string').parse;
-const config = parse(process.env.DATABASE_URL);
+const config = parse(process.env.HEROKU_POSTGRESQL_OLIVE_URL);
 const path = require('path');
 
 
@@ -47,5 +47,9 @@ const prodConnection = ({ env }) => ({
 
 module.exports = ({ env }) => {
 
+  if (process.env.NODE_ENV === 'development') {
+    console.log('connected to dev db')
+    return devConnection({ env })
+  }
   return prodConnection({ env })
 } 
