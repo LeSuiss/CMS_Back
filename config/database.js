@@ -1,9 +1,22 @@
 const parse = require('pg-connection-string').parse;
-const config = parse(process.env.HEROKU_POSTGRESQL_OLIVE_URL);
+console.log(process.env)
+const config = parse(process.env.HEROKU_POSTGRESQL_OLIVE_URL || process.env.DATABASE_URL);
 const path = require('path');
 
-
 const devConnection = ({ env }) => ({
+  upload: {
+    config: {
+      provider: 'cloudinary',
+      providerOptions: {
+        cloud_name: env('CLOUDINARY_NAME'),
+        api_key: env('CLOUDINARY_KEY'),
+        api_secret: env('CLOUDINARY_SECRET'),
+
+      },
+    },
+  },
+
+
   connection: {
     client: 'sqlite',
     connection: {
@@ -46,10 +59,10 @@ const prodConnection = ({ env }) => ({
 
 
 module.exports = ({ env }) => {
+  return devConnection({ env })
 
   if (process.env.NODE_ENV === 'development') {
     console.log('connected to dev db')
-    return devConnection({ env })
   }
   return prodConnection({ env })
 } 
