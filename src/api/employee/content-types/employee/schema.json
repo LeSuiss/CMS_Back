@@ -4,7 +4,8 @@
   "info": {
     "singularName": "employee",
     "pluralName": "employees",
-    "displayName": "employee"
+    "displayName": "employee",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,14 +13,15 @@
   "pluginOptions": {},
   "attributes": {
     "portait": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "email": {
       "type": "email"
@@ -29,6 +31,10 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "phone": {
+      "type": "string",
+      "required": true
     }
   }
 }
