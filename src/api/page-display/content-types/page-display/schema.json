@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "page_displays",
+  "info": {
+    "singularName": "page-display",
+    "pluralName": "page-displays",
+    "displayName": "PagestoDisplay"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ShallBeDisplayed": {
+      "type": "boolean"
+    },
+    "PageName": {
+      "type": "string"
+    }
+  }
+}

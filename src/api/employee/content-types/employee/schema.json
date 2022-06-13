@@ -35,6 +35,12 @@
     "phone": {
       "type": "string",
       "required": true
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Surname": {
+      "type": "string"
     }
   }
 }
