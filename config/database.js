@@ -57,9 +57,8 @@ const prodConnection = ({ env }) => ({
   },
 });
 
-
 module.exports = ({ env }) => {
-  return devConnection({ env })
+
 
   if (process.env.NODE_ENV === 'development') {
     console.log('connected to dev db')
