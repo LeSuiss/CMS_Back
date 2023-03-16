@@ -15,5 +15,12 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  'migrations': {
+    enabled: true,
+    config: {
+      autoStart: true,
+      migrationFolderPath: 'migrations'
+    },
+  },
   // ...
 });

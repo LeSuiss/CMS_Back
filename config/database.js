@@ -1,5 +1,4 @@
 const parse = require('pg-connection-string').parse;
-console.log(process.env)
 const config = parse(process.env.HEROKU_POSTGRESQL_OLIVE_URL || process.env.DATABASE_URL);
 const path = require('path');
 
@@ -15,8 +14,6 @@ const devConnection = ({ env }) => ({
       },
     },
   },
-
-
   connection: {
     client: 'sqlite',
     connection: {
@@ -62,6 +59,7 @@ module.exports = ({ env }) => {
 
   if (process.env.NODE_ENV === 'development') {
     console.log('connected to dev db')
+    return devConnection({ env })
   }
   return prodConnection({ env })
 } 

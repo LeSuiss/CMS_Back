@@ -33,16 +33,6 @@
         "videos",
         "audios"
       ]
-    },
-    "product_family": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::product-family.product-family"
-    },
-    "product_family_sub_family": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::product-family-sub-family.product-family-sub-family"
     }
   }
 }

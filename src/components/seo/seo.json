@@ -2,19 +2,36 @@
   "collectionName": "components_seo_seos",
   "info": {
     "displayName": "Seo",
-    "icon": "address-card"
+    "icon": "address-card",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "minLength": 40,
+      "maxLength": 60
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "locale": {
       "type": "string",
-      "default": "fr"
+      "default": "fr",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
